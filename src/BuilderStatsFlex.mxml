@@ -6,17 +6,21 @@
 			   initialize="init()">
 	<fx:Script>
 		<![CDATA[
+			import mx.collections.ArrayCollection;
 			import mx.controls.Alert;
 			import mx.events.FlexEvent;
+			import mx.events.ValidationResultEvent;
 			import mx.managers.BrowserManager;
 			import mx.managers.IBrowserManager;
 			import mx.rpc.events.FaultEvent;
 			import mx.rpc.events.ResultEvent;
-			import mx.utils.URLUtil;
 			import mx.utils.ObjectUtil;
+			import mx.utils.URLUtil;            
 			
 			
 			private var filepath:String = null;
+			private var lineCount:String = "Counting code...";
+			private var fileCount:String = "";
 				
 			private function init():void{
 				
@@ -27,9 +31,8 @@
 				trace("this.parameters.wsdl=" + this.parameters.wsdl);
 				
 				filepath = this.parameters.filepath;
-				fileStatsService.wsdl = this.parameters.wsdl + "?wsdl";
+				fileStatsService.wsdl = this.parameters.wsdl;
 				fileStatsService.init();
-				
 				
 				trace("filepath=" + filepath);
 				trace("wsdl=" + fileStatsService.wsdl);
@@ -78,6 +81,7 @@
 			protected function header_creationCompleteHandler(event:FlexEvent):void
 			{
 				getGrandTotalResult.token = fileStatsService.getGrandTotal(filepath);
+				getLineCountsAllResult.token = fileStatsService.getLineCountsAll(filepath);
 			}
 			
 
@@ -94,10 +98,29 @@
 			protected function getGrandTotalResult_resultHandler(event:ResultEvent):void
 			{
 				// TODO Auto-generated method stub
-				header.text = getGrandTotalResult.lastResult + " total lines of code";
+				lineCount = numFormat(getGrandTotalResult.lastResult) + " total lines of code";
+				header.text = lineCount + " " + fileCount;
 			}
 			
+			// Event handler to validate and format input.            
+			private function numFormat(number:Object):String
+			{
+				return numberFormatter.format(number.toString());
+			}
 			
+
+
+
+
+			protected function getLineCountsAllResult_resultHandler(event:ResultEvent):void
+			{
+				
+				var ac:ArrayCollection = null;
+				ac = getLineCountsAllResult.lastResult as ArrayCollection;
+				// TODO Auto-generated method stub
+				fileCount = "in " + numFormat(ac.length + 1) + " files.";
+				header.text = lineCount + " " + fileCount;
+			}
 
 		]]>
 	</fx:Script>
@@ -109,23 +132,25 @@
 		<s:State name="all"/>
 	</s:states>
 	<fx:Declarations>
+		<mx:NumberFormatter id="numberFormatter" precision="0" useThousandsSeparator="true" useNegativeSign="true"/>
+
 		<s:CallResponder id="getLinesByExtensionResult"/>
 		<filestatsservice:FileStatsService id="fileStatsService" fault="fileStatsService_faultHandler(event)" showBusyCursor="true" />
 		<s:CallResponder id="getLinesByDirectoryResult"/>
-		<s:CallResponder id="getLineCountsAllResult"/>
+		<s:CallResponder id="getLineCountsAllResult" result="getLineCountsAllResult_resultHandler(event)"/>
 		<s:CallResponder id="getGrandTotalResult" result="getGrandTotalResult_resultHandler(event)"/>
 	</fx:Declarations>
 	
 	<!-- Header-->
-	<s:RichText x="10" y="10" text="Counting code...." fontSize="17" id="header" creationComplete="header_creationCompleteHandler(event)" textAlign="left" width="237" height="22"/>
+	<s:RichText x="10" y="10" text="{lineCount} {fileCount}" fontSize="17" id="header" creationComplete="header_creationCompleteHandler(event)"  textAlign="left" height="22" width="796"/>
 	
 	<!-- Extension Interface-->
 	<s:Label x="10" y="41" text="Lines by Extension" includeIn="default,extension" id="exLabel"/>
 	<mx:DataGrid x="10" y="59" id="exGrid" creationComplete="exGrid_creationCompleteHandler(event)" dataProvider="{getLinesByExtensionResult.lastResult}" height="180" width="300" height.extension="406" includeIn="default,extension" >
 		<mx:columns>
 			<mx:DataGridColumn headerText="Extension" dataField="extension"/>
+			<mx:DataGridColumn headerText="Files" dataField="numberOfFiles" textAlign="right" />
 			<mx:DataGridColumn headerText="Lines" dataField="lines" width="75" textAlign="right"  />
-			
 		</mx:columns>
 	</mx:DataGrid>
 	<s:Button x="236" y="34" label="Detail" id="exButton" label.extension="Back" click="extensionDetail_clickHandler(event)" includeIn="default,extension" />
@@ -144,7 +169,7 @@
 		<mx:columns>
 			<mx:DataGridColumn headerText="Directory" dataField="relativeParent" />	
 			<mx:DataGridColumn headerText="Files" dataField="numberOfFiles" textAlign="right" />
-			<mx:DataGridColumn headerText="Lines" dataField="lines" width="75" textAlign="right" />
+			<mx:DataGridColumn headerText="Lines" dataField="lines" width="75" textAlign="right"  />
 		</mx:columns>
 	</mx:DataGrid>
 	<s:Button x="236" y="264" label="Detail" id="dirButton" includeIn="default,directory" x.directory="236" y.directory="30" label.directory="Back" click="directoryDetails_clickHandler(event)" />

@@ -16,43 +16,50 @@ import mx.events.PropertyChangeEvent;
 use namespace model_internal;
 
 [ExcludeClass]
-internal class _ExtensionInfoEntityMetadata extends com.adobe.fiber.valueobjects.AbstractEntityMetadata
+internal class _CfcinfoEntityMetadata extends com.adobe.fiber.valueobjects.AbstractEntityMetadata
 {
 	private static var emptyArray:Array = new Array();
 
-    model_internal static var allProperties:Array = new Array("numberOfFiles", "lines", "extension");
+    model_internal static var allProperties:Array = new Array("file", "functioncount", "hintedudfcount", "implicitfunctionscount", "ishinted", "propertycount", "relativefile", "relativeparent", "udfcount", "unhintedudfcount");
     model_internal static var allAssociationProperties:Array = new Array();
-    model_internal static var allRequiredProperties:Array = new Array("numberOfFiles", "lines", "extension");
-    model_internal static var allAlwaysAvailableProperties:Array = new Array("numberOfFiles", "lines", "extension");
+    model_internal static var allRequiredProperties:Array = new Array("file", "functioncount", "hintedudfcount", "implicitfunctionscount", "ishinted", "propertycount", "relativefile", "relativeparent", "udfcount", "unhintedudfcount");
+    model_internal static var allAlwaysAvailableProperties:Array = new Array("file", "functioncount", "hintedudfcount", "implicitfunctionscount", "ishinted", "propertycount", "relativefile", "relativeparent", "udfcount", "unhintedudfcount");
     model_internal static var guardedProperties:Array = new Array();
-    model_internal static var dataProperties:Array = new Array("numberOfFiles", "lines", "extension");
+    model_internal static var dataProperties:Array = new Array("file", "functioncount", "hintedudfcount", "implicitfunctionscount", "ishinted", "propertycount", "relativefile", "relativeparent", "udfcount", "unhintedudfcount");
     model_internal static var derivedProperties:Array = new Array();
     model_internal static var collectionProperties:Array = new Array();
     model_internal static var collectionBaseMap:Object;    
-    model_internal static var entityName:String = "ExtensionInfo";
+    model_internal static var entityName:String = "Cfcinfo";
     model_internal static var dependentsOnMap:Object;    
     model_internal static var dependedOnServices:Array =  new Array();
     
     
-    model_internal var _instance:_Super_ExtensionInfo;
+    model_internal var _instance:_Super_Cfcinfo;
     model_internal static var _nullStyle:com.adobe.fiber.styles.Style = new com.adobe.fiber.styles.Style();
     
-    public function _ExtensionInfoEntityMetadata(extensionInfo : _Super_ExtensionInfo)
+    public function _CfcinfoEntityMetadata(cfcinfo : _Super_Cfcinfo)
     {
         // initialize property maps
         if (model_internal::dependentsOnMap == null)
         {
             // depenents map
             model_internal::dependentsOnMap = new Object();
-            model_internal::dependentsOnMap["numberOfFiles"] = new Array();
-            model_internal::dependentsOnMap["lines"] = new Array();
-            model_internal::dependentsOnMap["extension"] = new Array();
+            model_internal::dependentsOnMap["file"] = new Array();
+            model_internal::dependentsOnMap["functioncount"] = new Array();
+            model_internal::dependentsOnMap["hintedudfcount"] = new Array();
+            model_internal::dependentsOnMap["implicitfunctionscount"] = new Array();
+            model_internal::dependentsOnMap["ishinted"] = new Array();
+            model_internal::dependentsOnMap["propertycount"] = new Array();
+            model_internal::dependentsOnMap["relativefile"] = new Array();
+            model_internal::dependentsOnMap["relativeparent"] = new Array();
+            model_internal::dependentsOnMap["udfcount"] = new Array();
+            model_internal::dependentsOnMap["unhintedudfcount"] = new Array();
                         
             // collection base map
             model_internal::collectionBaseMap = new Object()
         }                        
         
-        model_internal::_instance = extensionInfo;     
+        model_internal::_instance = cfcinfo;     
     }
     
     override public function getEntityName():String
@@ -93,7 +100,7 @@ internal class _ExtensionInfoEntityMetadata extends com.adobe.fiber.valueobjects
     override public function getDependants(propertyName:String):Array
     {
        if (model_internal::dataProperties.indexOf(propertyName) == -1)
-            throw new Error(propertyName + " is not a data property of entity ExtensionInfo");  
+            throw new Error(propertyName + " is not a data property of entity Cfcinfo");  
             
        return model_internal::dependentsOnMap[propertyName] as Array;  
     }
@@ -111,7 +118,7 @@ internal class _ExtensionInfoEntityMetadata extends com.adobe.fiber.valueobjects
     override public function getCollectionBase(propertyName:String):String
     {
        if (model_internal::collectionProperties.indexOf(propertyName) == -1)
-            throw new Error(propertyName + " is not a collection property of entity ExtensionInfo");  
+            throw new Error(propertyName + " is not a collection property of entity Cfcinfo");  
             
        return model_internal::collectionBaseMap[propertyName];
     }                
@@ -125,7 +132,7 @@ internal class _ExtensionInfoEntityMetadata extends com.adobe.fiber.valueobjects
      {
          if (model_internal::allProperties.indexOf(propertyName) == -1)
          {
-         	throw new Error(propertyName + " does not exist for entity ExtensionInfo");
+         	throw new Error(propertyName + " does not exist for entity Cfcinfo");
          }     
            
          return model_internal::_instance[propertyName];
@@ -135,7 +142,7 @@ internal class _ExtensionInfoEntityMetadata extends com.adobe.fiber.valueobjects
      {
          if (model_internal::dataProperties.indexOf(propertyName) == -1)
          {
-              throw new Error(propertyName + " is not a data property of entity ExtensionInfo");
+              throw new Error(propertyName + " is not a data property of entity Cfcinfo");
          }  
                                                      
          model_internal::_instance[propertyName] = value;
@@ -167,7 +174,7 @@ internal class _ExtensionInfoEntityMetadata extends com.adobe.fiber.valueobjects
      {         
          if (model_internal::allProperties.indexOf(propertyName) == -1)
          {
-         	throw new Error(propertyName + " does not exist for entity ExtensionInfo");
+         	throw new Error(propertyName + " does not exist for entity Cfcinfo");
          }   
                 
          if (model_internal::allAlwaysAvailableProperties.indexOf(propertyName) != -1)
@@ -264,19 +271,61 @@ internal class _ExtensionInfoEntityMetadata extends com.adobe.fiber.valueobjects
     }       
      
      [Bindable(event="propertyChange")] 
-     public function get isNumberOfFilesAvailable():Boolean
+     public function get isFileAvailable():Boolean
      {
         return true;
      }                       
                   
      [Bindable(event="propertyChange")] 
-     public function get isLinesAvailable():Boolean
+     public function get isFunctioncountAvailable():Boolean
      {
         return true;
      }                       
                   
      [Bindable(event="propertyChange")] 
-     public function get isExtensionAvailable():Boolean
+     public function get isHintedudfcountAvailable():Boolean
+     {
+        return true;
+     }                       
+                  
+     [Bindable(event="propertyChange")] 
+     public function get isImplicitfunctionscountAvailable():Boolean
+     {
+        return true;
+     }                       
+                  
+     [Bindable(event="propertyChange")] 
+     public function get isIshintedAvailable():Boolean
+     {
+        return true;
+     }                       
+                  
+     [Bindable(event="propertyChange")] 
+     public function get isPropertycountAvailable():Boolean
+     {
+        return true;
+     }                       
+                  
+     [Bindable(event="propertyChange")] 
+     public function get isRelativefileAvailable():Boolean
+     {
+        return true;
+     }                       
+                  
+     [Bindable(event="propertyChange")] 
+     public function get isRelativeparentAvailable():Boolean
+     {
+        return true;
+     }                       
+                  
+     [Bindable(event="propertyChange")] 
+     public function get isUdfcountAvailable():Boolean
+     {
+        return true;
+     }                       
+                  
+     [Bindable(event="propertyChange")] 
+     public function get isUnhintedudfcountAvailable():Boolean
      {
         return true;
      }                       
@@ -292,19 +341,61 @@ internal class _ExtensionInfoEntityMetadata extends com.adobe.fiber.valueobjects
      }
 
     [Bindable(event="propertyChange")]   
-    public function get numberOfFilesStyle():com.adobe.fiber.styles.Style
+    public function get fileStyle():com.adobe.fiber.styles.Style
     {
 		return model_internal::_nullStyle;		
     }      
     
     [Bindable(event="propertyChange")]   
-    public function get linesStyle():com.adobe.fiber.styles.Style
+    public function get functioncountStyle():com.adobe.fiber.styles.Style
     {
 		return model_internal::_nullStyle;		
     }      
     
     [Bindable(event="propertyChange")]   
-    public function get extensionStyle():com.adobe.fiber.styles.Style
+    public function get hintedudfcountStyle():com.adobe.fiber.styles.Style
+    {
+		return model_internal::_nullStyle;		
+    }      
+    
+    [Bindable(event="propertyChange")]   
+    public function get implicitfunctionscountStyle():com.adobe.fiber.styles.Style
+    {
+		return model_internal::_nullStyle;		
+    }      
+    
+    [Bindable(event="propertyChange")]   
+    public function get ishintedStyle():com.adobe.fiber.styles.Style
+    {
+		return model_internal::_nullStyle;		
+    }      
+    
+    [Bindable(event="propertyChange")]   
+    public function get propertycountStyle():com.adobe.fiber.styles.Style
+    {
+		return model_internal::_nullStyle;		
+    }      
+    
+    [Bindable(event="propertyChange")]   
+    public function get relativefileStyle():com.adobe.fiber.styles.Style
+    {
+		return model_internal::_nullStyle;		
+    }      
+    
+    [Bindable(event="propertyChange")]   
+    public function get relativeparentStyle():com.adobe.fiber.styles.Style
+    {
+		return model_internal::_nullStyle;		
+    }      
+    
+    [Bindable(event="propertyChange")]   
+    public function get udfcountStyle():com.adobe.fiber.styles.Style
+    {
+		return model_internal::_nullStyle;		
+    }      
+    
+    [Bindable(event="propertyChange")]   
+    public function get unhintedudfcountStyle():com.adobe.fiber.styles.Style
     {
 		return model_internal::_nullStyle;		
     }      

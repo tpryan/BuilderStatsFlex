@@ -16,45 +16,43 @@ import mx.events.PropertyChangeEvent;
 use namespace model_internal;
 
 [ExcludeClass]
-internal class _FileInfoEntityMetadata extends com.adobe.fiber.valueobjects.AbstractEntityMetadata
+internal class _ExtInfoEntityMetadata extends com.adobe.fiber.valueobjects.AbstractEntityMetadata
 {
 	private static var emptyArray:Array = new Array();
 
-    model_internal static var allProperties:Array = new Array("file", "extension", "lines", "relativeParent", "relativeFile");
+    model_internal static var allProperties:Array = new Array("extension", "lines", "numberoffiles");
     model_internal static var allAssociationProperties:Array = new Array();
-    model_internal static var allRequiredProperties:Array = new Array("file", "extension", "lines", "relativeParent", "relativeFile");
-    model_internal static var allAlwaysAvailableProperties:Array = new Array("file", "extension", "lines", "relativeParent", "relativeFile");
+    model_internal static var allRequiredProperties:Array = new Array("extension", "lines", "numberoffiles");
+    model_internal static var allAlwaysAvailableProperties:Array = new Array("extension", "lines", "numberoffiles");
     model_internal static var guardedProperties:Array = new Array();
-    model_internal static var dataProperties:Array = new Array("file", "extension", "lines", "relativeParent", "relativeFile");
+    model_internal static var dataProperties:Array = new Array("extension", "lines", "numberoffiles");
     model_internal static var derivedProperties:Array = new Array();
     model_internal static var collectionProperties:Array = new Array();
     model_internal static var collectionBaseMap:Object;    
-    model_internal static var entityName:String = "FileInfo";
+    model_internal static var entityName:String = "ExtInfo";
     model_internal static var dependentsOnMap:Object;    
     model_internal static var dependedOnServices:Array =  new Array();
     
     
-    model_internal var _instance:_Super_FileInfo;
+    model_internal var _instance:_Super_ExtInfo;
     model_internal static var _nullStyle:com.adobe.fiber.styles.Style = new com.adobe.fiber.styles.Style();
     
-    public function _FileInfoEntityMetadata(fileInfo : _Super_FileInfo)
+    public function _ExtInfoEntityMetadata(extInfo : _Super_ExtInfo)
     {
         // initialize property maps
         if (model_internal::dependentsOnMap == null)
         {
             // depenents map
             model_internal::dependentsOnMap = new Object();
-            model_internal::dependentsOnMap["file"] = new Array();
             model_internal::dependentsOnMap["extension"] = new Array();
             model_internal::dependentsOnMap["lines"] = new Array();
-            model_internal::dependentsOnMap["relativeParent"] = new Array();
-            model_internal::dependentsOnMap["relativeFile"] = new Array();
+            model_internal::dependentsOnMap["numberoffiles"] = new Array();
                         
             // collection base map
             model_internal::collectionBaseMap = new Object()
         }                        
         
-        model_internal::_instance = fileInfo;     
+        model_internal::_instance = extInfo;     
     }
     
     override public function getEntityName():String
@@ -95,7 +93,7 @@ internal class _FileInfoEntityMetadata extends com.adobe.fiber.valueobjects.Abst
     override public function getDependants(propertyName:String):Array
     {
        if (model_internal::dataProperties.indexOf(propertyName) == -1)
-            throw new Error(propertyName + " is not a data property of entity FileInfo");  
+            throw new Error(propertyName + " is not a data property of entity ExtInfo");  
             
        return model_internal::dependentsOnMap[propertyName] as Array;  
     }
@@ -113,7 +111,7 @@ internal class _FileInfoEntityMetadata extends com.adobe.fiber.valueobjects.Abst
     override public function getCollectionBase(propertyName:String):String
     {
        if (model_internal::collectionProperties.indexOf(propertyName) == -1)
-            throw new Error(propertyName + " is not a collection property of entity FileInfo");  
+            throw new Error(propertyName + " is not a collection property of entity ExtInfo");  
             
        return model_internal::collectionBaseMap[propertyName];
     }                
@@ -127,7 +125,7 @@ internal class _FileInfoEntityMetadata extends com.adobe.fiber.valueobjects.Abst
      {
          if (model_internal::allProperties.indexOf(propertyName) == -1)
          {
-         	throw new Error(propertyName + " does not exist for entity FileInfo");
+         	throw new Error(propertyName + " does not exist for entity ExtInfo");
          }     
            
          return model_internal::_instance[propertyName];
@@ -137,7 +135,7 @@ internal class _FileInfoEntityMetadata extends com.adobe.fiber.valueobjects.Abst
      {
          if (model_internal::dataProperties.indexOf(propertyName) == -1)
          {
-              throw new Error(propertyName + " is not a data property of entity FileInfo");
+              throw new Error(propertyName + " is not a data property of entity ExtInfo");
          }  
                                                      
          model_internal::_instance[propertyName] = value;
@@ -169,7 +167,7 @@ internal class _FileInfoEntityMetadata extends com.adobe.fiber.valueobjects.Abst
      {         
          if (model_internal::allProperties.indexOf(propertyName) == -1)
          {
-         	throw new Error(propertyName + " does not exist for entity FileInfo");
+         	throw new Error(propertyName + " does not exist for entity ExtInfo");
          }   
                 
          if (model_internal::allAlwaysAvailableProperties.indexOf(propertyName) != -1)
@@ -266,12 +264,6 @@ internal class _FileInfoEntityMetadata extends com.adobe.fiber.valueobjects.Abst
     }       
      
      [Bindable(event="propertyChange")] 
-     public function get isFileAvailable():Boolean
-     {
-        return true;
-     }                       
-                  
-     [Bindable(event="propertyChange")] 
      public function get isExtensionAvailable():Boolean
      {
         return true;
@@ -284,13 +276,7 @@ internal class _FileInfoEntityMetadata extends com.adobe.fiber.valueobjects.Abst
      }                       
                   
      [Bindable(event="propertyChange")] 
-     public function get isRelativeParentAvailable():Boolean
-     {
-        return true;
-     }                       
-                  
-     [Bindable(event="propertyChange")] 
-     public function get isRelativeFileAvailable():Boolean
+     public function get isNumberoffilesAvailable():Boolean
      {
         return true;
      }                       
@@ -306,12 +292,6 @@ internal class _FileInfoEntityMetadata extends com.adobe.fiber.valueobjects.Abst
      }
 
     [Bindable(event="propertyChange")]   
-    public function get fileStyle():com.adobe.fiber.styles.Style
-    {
-		return model_internal::_nullStyle;		
-    }      
-    
-    [Bindable(event="propertyChange")]   
     public function get extensionStyle():com.adobe.fiber.styles.Style
     {
 		return model_internal::_nullStyle;		
@@ -324,13 +304,7 @@ internal class _FileInfoEntityMetadata extends com.adobe.fiber.valueobjects.Abst
     }      
     
     [Bindable(event="propertyChange")]   
-    public function get relativeParentStyle():com.adobe.fiber.styles.Style
-    {
-		return model_internal::_nullStyle;		
-    }      
-    
-    [Bindable(event="propertyChange")]   
-    public function get relativeFileStyle():com.adobe.fiber.styles.Style
+    public function get numberoffilesStyle():com.adobe.fiber.styles.Style
     {
 		return model_internal::_nullStyle;		
     }      

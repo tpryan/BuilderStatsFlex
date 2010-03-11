@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:Application xmlns:fx="http://ns.adobe.com/mxml/2009" 
+			   xmlns:s="library://ns.adobe.com/flex/spark" 
+			   xmlns:mx="library://ns.adobe.com/flex/mx" skinClass="ApplicationBackground"  
+			   xmlns:cfcstatsservice="services.cfcstatsservice.*" currentState="master"
+			   initialize="init()">
+	<fx:Script>
+		<![CDATA[
+			import mx.controls.Alert;
+			import mx.events.FlexEvent;
+			
+			private var rootPath:String = "";
+			
+			private function init():void{
+				
+				rootPath = this.parameters.rootpath;
+				cfcStatsService.url = this.parameters.cfc;
+				cfcStatsService.init();
+				
+			}
+			
+			protected function masterGrid_creationCompleteHandler(event:FlexEvent):void
+			{
+				getBaseStatsResult.token = cfcStatsService.getBaseStats("getBaseStats", rootPath, "plain");
+			}
+			
+			
+			protected function hintGrid_creationCompleteHandler(event:FlexEvent):void
+			{
+				getHintedCountsResult.token = cfcStatsService.getHintedCounts("plain", "getHintedCounts", rootPath);
+			}
+			
+			protected function implicitGrid_creationCompleteHandler(event:FlexEvent):void
+			{
+				getimplicitCountsResult.token = cfcStatsService.getimplicitCounts("plain", "getimplicitCounts", rootPath);
+			}
+
+			protected function implicitButton_clickHandler(event:MouseEvent):void
+			{
+				(currentState == 'master') ? currentState = 'implicit' : currentState = 'master';
+			}
+
+			protected function hintButton_clickHandler(event:MouseEvent):void
+			{
+				(currentState == 'master') ? currentState = 'hint' : currentState = 'master';
+			}
+
+		]]>
+	</fx:Script>
+	<s:states>
+		<s:State name="master"/>
+		<s:State name="implicit"/>
+		<s:State name="hint"/>
+	</s:states>
+	<fx:Declarations>
+		<s:CallResponder id="getBaseStatsResult"/>
+		<cfcstatsservice:CfcStatsService id="cfcStatsService" fault="Alert.show(event.fault.faultString + '\n' + event.fault.faultDetail)" showBusyCursor="true"/>
+		<s:CallResponder id="getimplicitCountsResult"/>
+		<s:CallResponder id="getHintedCountsResult"/>
+		<!-- Place non-visual elements (e.g., services, value objects) here -->
+	</fx:Declarations>
+	
+	<!--CFC Info 	-->
+	<mx:DataGrid x="10" y="10"  id="masterGrid" creationComplete="masterGrid_creationCompleteHandler(event)" 
+				 width="708" width.implicit="386" width.hint="386" height="388"  width.master="740" dataProvider="{getBaseStatsResult.lastResult}">
+		<mx:columns>
+			<mx:DataGridColumn headerText="File" dataField="relativefile"/>
+			<mx:DataGridColumn id="functionCountMaster" includeIn="master" headerText="Functions" dataField="functioncount" width="75"/>
+			<mx:DataGridColumn id="propertyCountMaster" includeIn="master" headerText="Properties" dataField="propertycount" width="75"/>
+			<mx:DataGridColumn id="isHintedMaster" includeIn="master" headerText="CFC Hinted" dataField="ishinted" width="75" itemRenderer="hintedRender"/>
+			<mx:DataGridColumn id="udfCountMaster" includeIn="implicit" headerText="UDF" dataField="udfcount" width="75"/>
+			<mx:DataGridColumn id="implicitFunctionsCountMaster" includeIn="implicit" headerText="Implicit" dataField="implicitfunctionscount" width="75"/>
+			<mx:DataGridColumn id="hintedudfCountMaster" includeIn="hint" headerText="Hinted" dataField="hintedudfcount" width="75"/>
+			<mx:DataGridColumn id="unhintedudfCountMaster" includeIn="hint" headerText="Unhinted" dataField="unhintedudfcount" width="75" itemRenderer="unhintedRenderer"/>
+		</mx:columns>
+	</mx:DataGrid>
+	
+	<!--Hint Info -->
+	<mx:DataGrid id="hintGrid" x="382"  creationComplete="hintGrid_creationCompleteHandler(event)" 
+				  x.hint="10" includeIn="hint,master" height="58" y="406" width="290" dataProvider="{getHintedCountsResult.lastResult}">
+		<mx:columns>
+			<mx:DataGridColumn headerText="" dataField="counttype"/>
+			<mx:DataGridColumn headerText="" dataField="count" width="75"/>
+		</mx:columns>
+	</mx:DataGrid>
+	
+	<s:Button id="hintButton" y="443" label="Details" click="hintButton_clickHandler(event)" x.hint="308"  includeIn="hint,master" x.master="680"  label.hint="Back"/>
+	
+	<mx:PieChart includeIn="hint" x="406" y="10" id="hintChart" height="388"  showDataTips="true" dataProvider="{getHintedCountsResult.lastResult}">
+		<mx:series>
+			<mx:PieSeries displayName="hinted" field="count" id="pieSeries2" nameField="counttype"/>
+		</mx:series>
+	</mx:PieChart>
+	
+	<mx:Legend id="hintLegend" includeIn="hint" dataProvider="{hintChart}" x="667" y="406"/>
+	
+	<!--Implicit Info -->
+	<mx:DataGrid id="implicitGrid" creationComplete="implicitGrid_creationCompleteHandler(event)" 
+				  includeIn="implicit,master" height="58" y="406" x="10" width="290" dataProvider="{getimplicitCountsResult.lastResult}">
+		<mx:columns>
+			<mx:DataGridColumn headerText="" dataField="counttype"/>
+			<mx:DataGridColumn headerText="" dataField="count" width="75"/>
+		</mx:columns>
+	</mx:DataGrid>
+	
+	<s:Button id="implicitButton" label="Details" includeIn="implicit,master" click="implicitButton_clickHandler(event)" x="308" y="443" label.implicit="Back"/>
+	
+	<mx:PieChart id="implicitChart"  includeIn="implicit" x="406" y="10"  showDataTips="true" height="388" dataProvider="{getimplicitCountsResult.lastResult}">
+		<mx:series>
+			<mx:PieSeries id="pieSeries" displayName="Implicit" field="count" nameField="counttype"/>
+		</mx:series>
+	</mx:PieChart>
+		
+	<mx:Legend id="implicitLegend" includeIn="implicit" dataProvider="{implicitChart}" x="667" y="404"/>
+	
+	
+	
+	<s:transitions>
+		<s:Transition fromState="master" toState="hint" autoReverse="true">
+			<s:Parallel>
+				<s:Parallel target="{implicitGrid}">
+					<s:Fade duration="500" />
+				</s:Parallel>
+				<s:Parallel target="{implicitButton}">
+					<s:Fade duration="500" />
+				</s:Parallel>
+				<s:Parallel target="{masterGrid}">
+					<s:Resize duration="500" startDelay="500" />
+				</s:Parallel>
+				<s:Parallel target="{hintGrid}">
+					<s:Move duration="500" startDelay="500" />
+				</s:Parallel>
+				<s:Parallel target="{hintButton}">
+					<s:Move duration="500" startDelay="500" />
+				</s:Parallel>
+				<s:Parallel target="{hintChart}">
+					<s:Fade duration="500" startDelay="1000" />
+				</s:Parallel>
+				<s:Parallel target="{hintLegend}">
+					<s:Fade duration="500" startDelay="1000" />
+				</s:Parallel>
+			</s:Parallel>
+		</s:Transition>
+		<s:Transition fromState="hint" toState="master" autoReverse="true">
+			<s:Parallel>
+				<s:Parallel target="{implicitGrid}">
+					<s:Fade duration="500" startDelay="1000"/>
+				</s:Parallel>
+				<s:Parallel target="{implicitButton}">
+					<s:Fade duration="500" startDelay="1000"/>
+				</s:Parallel>
+				<s:Parallel target="{masterGrid}">
+					<s:Resize duration="500" startDelay="500" />
+				</s:Parallel>
+				<s:Parallel target="{hintGrid}">
+					<s:Move duration="500" startDelay="500" />
+				</s:Parallel>
+				<s:Parallel target="{hintButton}">
+					<s:Move duration="500" startDelay="500" />
+				</s:Parallel>
+				<s:Parallel target="{hintChart}">
+					<s:Fade duration="500" />
+				</s:Parallel>
+				<s:Parallel target="{hintLegend}">
+					<s:Fade duration="500"  />
+				</s:Parallel>
+			</s:Parallel>
+		</s:Transition>
+		<s:Transition fromState="master" toState="implicit" autoReverse="true">
+			<s:Parallel>
+				<s:Parallel target="{hintGrid}">
+					<s:Fade duration="500" />
+				</s:Parallel>
+				<s:Parallel target="{hintButton}">
+					<s:Fade duration="500" />
+				</s:Parallel>
+				<s:Parallel target="{masterGrid}">
+					<s:Resize duration="500" startDelay="500" />
+				</s:Parallel>
+				<s:Parallel target="{implicitChart}">
+					<s:Fade duration="500" startDelay="1000" />
+				</s:Parallel>
+				<s:Parallel target="{implicitLegend}">
+					<s:Fade duration="500" startDelay="1000" />
+				</s:Parallel>
+				
+			</s:Parallel>
+		</s:Transition>
+		
+		<s:Transition fromState="implicit" toState="master" autoReverse="true">
+			<s:Parallel>
+				<s:Parallel target="{hintGrid}">
+					<s:Fade duration="500" startDelay="1000"/>
+				</s:Parallel>
+				<s:Parallel target="{hintButton}">
+					<s:Fade duration="500" startDelay="1000"/>
+				</s:Parallel>
+				<s:Parallel target="{masterGrid}">
+					<s:Resize duration="500" startDelay="500" />
+				</s:Parallel>
+				<s:Parallel target="{implicitChart}">
+					<s:Fade duration="500" />
+				</s:Parallel>
+				<s:Parallel target="{implicitLegend}">
+					<s:Fade duration="500"  />
+				</s:Parallel>
+				
+			</s:Parallel>
+		</s:Transition>
+	</s:transitions>
+	
+</s:Application>

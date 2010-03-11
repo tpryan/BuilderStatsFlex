@@ -16,43 +16,43 @@ import mx.events.PropertyChangeEvent;
 use namespace model_internal;
 
 [ExcludeClass]
-internal class _DirectoryInfoEntityMetadata extends com.adobe.fiber.valueobjects.AbstractEntityMetadata
+internal class _DirInfoEntityMetadata extends com.adobe.fiber.valueobjects.AbstractEntityMetadata
 {
 	private static var emptyArray:Array = new Array();
 
-    model_internal static var allProperties:Array = new Array("numberOfFiles", "lines", "relativeParent");
+    model_internal static var allProperties:Array = new Array("lines", "numberoffiles", "relativeparent");
     model_internal static var allAssociationProperties:Array = new Array();
-    model_internal static var allRequiredProperties:Array = new Array("numberOfFiles", "lines", "relativeParent");
-    model_internal static var allAlwaysAvailableProperties:Array = new Array("numberOfFiles", "lines", "relativeParent");
+    model_internal static var allRequiredProperties:Array = new Array("lines", "numberoffiles", "relativeparent");
+    model_internal static var allAlwaysAvailableProperties:Array = new Array("lines", "numberoffiles", "relativeparent");
     model_internal static var guardedProperties:Array = new Array();
-    model_internal static var dataProperties:Array = new Array("numberOfFiles", "lines", "relativeParent");
+    model_internal static var dataProperties:Array = new Array("lines", "numberoffiles", "relativeparent");
     model_internal static var derivedProperties:Array = new Array();
     model_internal static var collectionProperties:Array = new Array();
     model_internal static var collectionBaseMap:Object;    
-    model_internal static var entityName:String = "DirectoryInfo";
+    model_internal static var entityName:String = "DirInfo";
     model_internal static var dependentsOnMap:Object;    
     model_internal static var dependedOnServices:Array =  new Array();
     
     
-    model_internal var _instance:_Super_DirectoryInfo;
+    model_internal var _instance:_Super_DirInfo;
     model_internal static var _nullStyle:com.adobe.fiber.styles.Style = new com.adobe.fiber.styles.Style();
     
-    public function _DirectoryInfoEntityMetadata(directoryInfo : _Super_DirectoryInfo)
+    public function _DirInfoEntityMetadata(dirInfo : _Super_DirInfo)
     {
         // initialize property maps
         if (model_internal::dependentsOnMap == null)
         {
             // depenents map
             model_internal::dependentsOnMap = new Object();
-            model_internal::dependentsOnMap["numberOfFiles"] = new Array();
             model_internal::dependentsOnMap["lines"] = new Array();
-            model_internal::dependentsOnMap["relativeParent"] = new Array();
+            model_internal::dependentsOnMap["numberoffiles"] = new Array();
+            model_internal::dependentsOnMap["relativeparent"] = new Array();
                         
             // collection base map
             model_internal::collectionBaseMap = new Object()
         }                        
         
-        model_internal::_instance = directoryInfo;     
+        model_internal::_instance = dirInfo;     
     }
     
     override public function getEntityName():String
@@ -93,7 +93,7 @@ internal class _DirectoryInfoEntityMetadata extends com.adobe.fiber.valueobjects
     override public function getDependants(propertyName:String):Array
     {
        if (model_internal::dataProperties.indexOf(propertyName) == -1)
-            throw new Error(propertyName + " is not a data property of entity DirectoryInfo");  
+            throw new Error(propertyName + " is not a data property of entity DirInfo");  
             
        return model_internal::dependentsOnMap[propertyName] as Array;  
     }
@@ -111,7 +111,7 @@ internal class _DirectoryInfoEntityMetadata extends com.adobe.fiber.valueobjects
     override public function getCollectionBase(propertyName:String):String
     {
        if (model_internal::collectionProperties.indexOf(propertyName) == -1)
-            throw new Error(propertyName + " is not a collection property of entity DirectoryInfo");  
+            throw new Error(propertyName + " is not a collection property of entity DirInfo");  
             
        return model_internal::collectionBaseMap[propertyName];
     }                
@@ -125,7 +125,7 @@ internal class _DirectoryInfoEntityMetadata extends com.adobe.fiber.valueobjects
      {
          if (model_internal::allProperties.indexOf(propertyName) == -1)
          {
-         	throw new Error(propertyName + " does not exist for entity DirectoryInfo");
+         	throw new Error(propertyName + " does not exist for entity DirInfo");
          }     
            
          return model_internal::_instance[propertyName];
@@ -135,7 +135,7 @@ internal class _DirectoryInfoEntityMetadata extends com.adobe.fiber.valueobjects
      {
          if (model_internal::dataProperties.indexOf(propertyName) == -1)
          {
-              throw new Error(propertyName + " is not a data property of entity DirectoryInfo");
+              throw new Error(propertyName + " is not a data property of entity DirInfo");
          }  
                                                      
          model_internal::_instance[propertyName] = value;
@@ -167,7 +167,7 @@ internal class _DirectoryInfoEntityMetadata extends com.adobe.fiber.valueobjects
      {         
          if (model_internal::allProperties.indexOf(propertyName) == -1)
          {
-         	throw new Error(propertyName + " does not exist for entity DirectoryInfo");
+         	throw new Error(propertyName + " does not exist for entity DirInfo");
          }   
                 
          if (model_internal::allAlwaysAvailableProperties.indexOf(propertyName) != -1)
@@ -264,19 +264,19 @@ internal class _DirectoryInfoEntityMetadata extends com.adobe.fiber.valueobjects
     }       
      
      [Bindable(event="propertyChange")] 
-     public function get isNumberOfFilesAvailable():Boolean
-     {
-        return true;
-     }                       
-                  
-     [Bindable(event="propertyChange")] 
      public function get isLinesAvailable():Boolean
      {
         return true;
      }                       
                   
      [Bindable(event="propertyChange")] 
-     public function get isRelativeParentAvailable():Boolean
+     public function get isNumberoffilesAvailable():Boolean
+     {
+        return true;
+     }                       
+                  
+     [Bindable(event="propertyChange")] 
+     public function get isRelativeparentAvailable():Boolean
      {
         return true;
      }                       
@@ -292,19 +292,19 @@ internal class _DirectoryInfoEntityMetadata extends com.adobe.fiber.valueobjects
      }
 
     [Bindable(event="propertyChange")]   
-    public function get numberOfFilesStyle():com.adobe.fiber.styles.Style
-    {
-		return model_internal::_nullStyle;		
-    }      
-    
-    [Bindable(event="propertyChange")]   
     public function get linesStyle():com.adobe.fiber.styles.Style
     {
 		return model_internal::_nullStyle;		
     }      
     
     [Bindable(event="propertyChange")]   
-    public function get relativeParentStyle():com.adobe.fiber.styles.Style
+    public function get numberoffilesStyle():com.adobe.fiber.styles.Style
+    {
+		return model_internal::_nullStyle;		
+    }      
+    
+    [Bindable(event="propertyChange")]   
+    public function get relativeparentStyle():com.adobe.fiber.styles.Style
     {
 		return model_internal::_nullStyle;		
     }      

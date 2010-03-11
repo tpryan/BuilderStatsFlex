@@ -1,6 +1,6 @@
 /**
  * This is a generated class and is not intended for modfication.  To customize behavior
- * of this value object you may modify the generated sub-class of this class - DirectoryInfo.as.
+ * of this value object you may modify the generated sub-class of this class - DirInfo.as.
  */
 
 package valueObjects
@@ -20,7 +20,7 @@ import com.adobe.fiber.valueobjects.AvailablePropertyIterator;
 use namespace model_internal;
 
 [ExcludeClass]
-public class _Super_DirectoryInfo extends flash.events.EventDispatcher implements com.adobe.fiber.valueobjects.IValueObject
+public class _Super_DirInfo extends flash.events.EventDispatcher implements com.adobe.fiber.valueobjects.IValueObject
 {
     model_internal static function initRemoteClassAliasSingle(cz:Class) : void 
     {
@@ -30,14 +30,14 @@ public class _Super_DirectoryInfo extends flash.events.EventDispatcher implement
     {
     }
 
-	model_internal var _dminternal_model : _DirectoryInfoEntityMetadata;
+	model_internal var _dminternal_model : _DirInfoEntityMetadata;
 
 	/**
 	 * properties
 	 */
-	private var _internal_numberOfFiles : Number = 0;
 	private var _internal_lines : Number = 0;
-	private var _internal_relativeParent : String;
+	private var _internal_numberoffiles : String;
+	private var _internal_relativeparent : String;
 
     private static var emptyArray:Array = new Array();
 
@@ -48,9 +48,9 @@ public class _Super_DirectoryInfo extends flash.events.EventDispatcher implement
     
 	model_internal var _changeWatcherArray:Array = new Array();   
 
-	public function _Super_DirectoryInfo() 
+	public function _Super_DirInfo() 
 	{	
-		_model = new _DirectoryInfoEntityMetadata(this);
+		_model = new _DirInfoEntityMetadata(this);
 	
 		// Bind to own data properties for cache invalidation triggering  
        
@@ -60,41 +60,24 @@ public class _Super_DirectoryInfo extends flash.events.EventDispatcher implement
      * data property getters
      */
 	[Bindable(event="propertyChange")] 
-    public function get numberOfFiles() : Number    
-    {
-            return _internal_numberOfFiles;
-    }    
-	[Bindable(event="propertyChange")] 
     public function get lines() : Number    
     {
             return _internal_lines;
     }    
 	[Bindable(event="propertyChange")] 
-    public function get relativeParent() : String    
+    public function get numberoffiles() : String    
     {
-            return _internal_relativeParent;
+            return _internal_numberoffiles;
+    }    
+	[Bindable(event="propertyChange")] 
+    public function get relativeparent() : String    
+    {
+            return _internal_relativeparent;
     }    
 
     /**
      * data property setters
      */      
-    public function set numberOfFiles(value:Number) : void 
-    {    	
-        var recalcValid:Boolean = false;
-    	
-    	
-    	var oldValue:Number = _internal_numberOfFiles;               
-        if (oldValue !== value)
-        {
-            _internal_numberOfFiles = value;
-        	this.dispatchEvent(mx.events.PropertyChangeEvent.createUpdateEvent(this, "numberOfFiles", oldValue, _internal_numberOfFiles));
-        }    	     
-        
-        if (recalcValid && model_internal::_cacheInitialized_isValid)
-        {
-            model_internal::isValid_der = model_internal::calculateIsValid();
-        }  
-    }    
     public function set lines(value:Number) : void 
     {    	
         var recalcValid:Boolean = false;
@@ -112,20 +95,41 @@ public class _Super_DirectoryInfo extends flash.events.EventDispatcher implement
             model_internal::isValid_der = model_internal::calculateIsValid();
         }  
     }    
-    public function set relativeParent(value:String) : void 
+    public function set numberoffiles(value:String) : void 
     {    	
         var recalcValid:Boolean = false;
-    	if (value == null || _internal_relativeParent == null)
+    	if (value == null || _internal_numberoffiles == null)
     	{
     		recalcValid = true;
     	}	
     	
     	
-    	var oldValue:String = _internal_relativeParent;               
+    	var oldValue:String = _internal_numberoffiles;               
         if (oldValue !== value)
         {
-            _internal_relativeParent = value;
-        	this.dispatchEvent(mx.events.PropertyChangeEvent.createUpdateEvent(this, "relativeParent", oldValue, _internal_relativeParent));
+            _internal_numberoffiles = value;
+        	this.dispatchEvent(mx.events.PropertyChangeEvent.createUpdateEvent(this, "numberoffiles", oldValue, _internal_numberoffiles));
+        }    	     
+        
+        if (recalcValid && model_internal::_cacheInitialized_isValid)
+        {
+            model_internal::isValid_der = model_internal::calculateIsValid();
+        }  
+    }    
+    public function set relativeparent(value:String) : void 
+    {    	
+        var recalcValid:Boolean = false;
+    	if (value == null || _internal_relativeparent == null)
+    	{
+    		recalcValid = true;
+    	}	
+    	
+    	
+    	var oldValue:String = _internal_relativeparent;               
+        if (oldValue !== value)
+        {
+            _internal_relativeparent = value;
+        	this.dispatchEvent(mx.events.PropertyChangeEvent.createUpdateEvent(this, "relativeparent", oldValue, _internal_relativeparent));
         }    	     
         
         if (recalcValid && model_internal::_cacheInitialized_isValid)
@@ -165,10 +169,15 @@ public class _Super_DirectoryInfo extends flash.events.EventDispatcher implement
         var violatedConsts:Array = new Array();    
         var validationFailureMessages:Array = new Array();    
 
-		if (_model.isRelativeParentAvailable && _internal_relativeParent == null)
+		if (_model.isNumberoffilesAvailable && _internal_numberoffiles == null)
 		{
-			violatedConsts.push("relativeParentIsRequired");
-			validationFailureMessages.push("relativeParent is required");
+			violatedConsts.push("numberoffilesIsRequired");
+			validationFailureMessages.push("numberoffiles is required");
+		}
+		if (_model.isRelativeparentAvailable && _internal_relativeparent == null)
+		{
+			violatedConsts.push("relativeparentIsRequired");
+			validationFailureMessages.push("relativeparent is required");
 		}
 
 		var styleValidity:Boolean = true;
@@ -202,14 +211,14 @@ public class _Super_DirectoryInfo extends flash.events.EventDispatcher implement
 
     [Transient] 
 	[Bindable(event="propertyChange")] 
-    public function get _model() : _DirectoryInfoEntityMetadata
+    public function get _model() : _DirInfoEntityMetadata
     {
 		return model_internal::_dminternal_model;              
     }	
     
-    public function set _model(value : _DirectoryInfoEntityMetadata) : void       
+    public function set _model(value : _DirInfoEntityMetadata) : void       
     {
-    	var oldValue : _DirectoryInfoEntityMetadata = model_internal::_dminternal_model;               
+    	var oldValue : _DirInfoEntityMetadata = model_internal::_dminternal_model;               
         if (oldValue !== value)
         {
         	model_internal::_dminternal_model = value;

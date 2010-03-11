@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:MXDataGridItemRenderer xmlns:fx="http://ns.adobe.com/mxml/2009" 
+						  xmlns:s="library://ns.adobe.com/flex/spark" 
+						  xmlns:mx="library://ns.adobe.com/flex/mx" 
+						  focusEnabled="true">
+	
+	<fx:Script>
+		<![CDATA[
+			// Event handler to validate and format input.            
+			private function numFormat(number:Object):String
+			{
+				return numberFormatter.format(number.toString());
+			}
+		]]>
+	</fx:Script>
+	
+	
+	<s:Label id="lblData" top="5" left="0" right="5" bottom="0" text="{numFormat(dataGridListData.label)}" />
+	
+	
+	<fx:Declarations>
+		<mx:NumberFormatter id="numberFormatter" precision="0" useThousandsSeparator="true" useNegativeSign="true"/>
+	</fx:Declarations>
+	
+</s:MXDataGridItemRenderer>

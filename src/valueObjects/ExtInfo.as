@@ -1,5 +1,5 @@
 /**
- * This is a generated sub-class of _DirectoryInfo.as and is intended for behavior
+ * This is a generated sub-class of _ExtInfo.as and is intended for behavior
  * customization.  This class is only generated when there is no file already present
  * at its target location.  Thus custom behavior that you add here will survive regeneration
  * of the super-class. 
@@ -15,7 +15,7 @@ package valueObjects
 
 import com.adobe.fiber.core.model_internal;
 
-public class DirectoryInfo extends _Super_DirectoryInfo
+public class ExtInfo extends _Super_ExtInfo
 {
     /** 
      * DO NOT MODIFY THIS STATIC INITIALIZER - IT IS NECESSARY
@@ -30,17 +30,17 @@ public class DirectoryInfo extends _Super_DirectoryInfo
      */     
     public static function _initRemoteClassAlias() : void
     {
-        _Super_DirectoryInfo.model_internal::initRemoteClassAliasSingle(valueObjects.DirectoryInfo);
-        _Super_DirectoryInfo.model_internal::initRemoteClassAliasAllRelated();
+        _Super_ExtInfo.model_internal::initRemoteClassAliasSingle(valueObjects.ExtInfo);
+        _Super_ExtInfo.model_internal::initRemoteClassAliasAllRelated();
     }
      
     model_internal static function initRemoteClassAliasSingleChild() : void
     {
-        _Super_DirectoryInfo.model_internal::initRemoteClassAliasSingle(valueObjects.DirectoryInfo);
+        _Super_ExtInfo.model_internal::initRemoteClassAliasSingle(valueObjects.ExtInfo);
     }
     
     {
-        _Super_DirectoryInfo.model_internal::initRemoteClassAliasSingle(valueObjects.DirectoryInfo);
+        _Super_ExtInfo.model_internal::initRemoteClassAliasSingle(valueObjects.ExtInfo);
     }
     /** 
      * END OF DO NOT MODIFY SECTION

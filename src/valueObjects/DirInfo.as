@@ -1,5 +1,5 @@
 /**
- * This is a generated sub-class of _FileInfo.as and is intended for behavior
+ * This is a generated sub-class of _DirInfo.as and is intended for behavior
  * customization.  This class is only generated when there is no file already present
  * at its target location.  Thus custom behavior that you add here will survive regeneration
  * of the super-class. 
@@ -15,7 +15,7 @@ package valueObjects
 
 import com.adobe.fiber.core.model_internal;
 
-public class FileInfo extends _Super_FileInfo
+public class DirInfo extends _Super_DirInfo
 {
     /** 
      * DO NOT MODIFY THIS STATIC INITIALIZER - IT IS NECESSARY
@@ -30,17 +30,17 @@ public class FileInfo extends _Super_FileInfo
      */     
     public static function _initRemoteClassAlias() : void
     {
-        _Super_FileInfo.model_internal::initRemoteClassAliasSingle(valueObjects.FileInfo);
-        _Super_FileInfo.model_internal::initRemoteClassAliasAllRelated();
+        _Super_DirInfo.model_internal::initRemoteClassAliasSingle(valueObjects.DirInfo);
+        _Super_DirInfo.model_internal::initRemoteClassAliasAllRelated();
     }
      
     model_internal static function initRemoteClassAliasSingleChild() : void
     {
-        _Super_FileInfo.model_internal::initRemoteClassAliasSingle(valueObjects.FileInfo);
+        _Super_DirInfo.model_internal::initRemoteClassAliasSingle(valueObjects.DirInfo);
     }
     
     {
-        _Super_FileInfo.model_internal::initRemoteClassAliasSingle(valueObjects.FileInfo);
+        _Super_DirInfo.model_internal::initRemoteClassAliasSingle(valueObjects.DirInfo);
     }
     /** 
      * END OF DO NOT MODIFY SECTION

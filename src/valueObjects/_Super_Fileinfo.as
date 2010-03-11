@@ -1,6 +1,6 @@
 /**
  * This is a generated class and is not intended for modfication.  To customize behavior
- * of this value object you may modify the generated sub-class of this class - ExtensionInfo.as.
+ * of this value object you may modify the generated sub-class of this class - Fileinfo.as.
  */
 
 package valueObjects
@@ -20,7 +20,7 @@ import com.adobe.fiber.valueobjects.AvailablePropertyIterator;
 use namespace model_internal;
 
 [ExcludeClass]
-public class _Super_ExtensionInfo extends flash.events.EventDispatcher implements com.adobe.fiber.valueobjects.IValueObject
+public class _Super_Fileinfo extends flash.events.EventDispatcher implements com.adobe.fiber.valueobjects.IValueObject
 {
     model_internal static function initRemoteClassAliasSingle(cz:Class) : void 
     {
@@ -30,14 +30,16 @@ public class _Super_ExtensionInfo extends flash.events.EventDispatcher implement
     {
     }
 
-	model_internal var _dminternal_model : _ExtensionInfoEntityMetadata;
+	model_internal var _dminternal_model : _FileinfoEntityMetadata;
 
 	/**
 	 * properties
 	 */
-	private var _internal_numberOfFiles : Number = 0;
-	private var _internal_lines : Number = 0;
 	private var _internal_extension : String;
+	private var _internal_file : String;
+	private var _internal_lines : Number = 0;
+	private var _internal_relativefile : String;
+	private var _internal_relativeparent : String;
 
     private static var emptyArray:Array = new Array();
 
@@ -48,9 +50,9 @@ public class _Super_ExtensionInfo extends flash.events.EventDispatcher implement
     
 	model_internal var _changeWatcherArray:Array = new Array();   
 
-	public function _Super_ExtensionInfo() 
+	public function _Super_Fileinfo() 
 	{	
-		_model = new _ExtensionInfoEntityMetadata(this);
+		_model = new _FileinfoEntityMetadata(this);
 	
 		// Bind to own data properties for cache invalidation triggering  
        
@@ -60,9 +62,14 @@ public class _Super_ExtensionInfo extends flash.events.EventDispatcher implement
      * data property getters
      */
 	[Bindable(event="propertyChange")] 
-    public function get numberOfFiles() : Number    
+    public function get extension() : String    
     {
-            return _internal_numberOfFiles;
+            return _internal_extension;
+    }    
+	[Bindable(event="propertyChange")] 
+    public function get file() : String    
+    {
+            return _internal_file;
     }    
 	[Bindable(event="propertyChange")] 
     public function get lines() : Number    
@@ -70,24 +77,54 @@ public class _Super_ExtensionInfo extends flash.events.EventDispatcher implement
             return _internal_lines;
     }    
 	[Bindable(event="propertyChange")] 
-    public function get extension() : String    
+    public function get relativefile() : String    
     {
-            return _internal_extension;
+            return _internal_relativefile;
+    }    
+	[Bindable(event="propertyChange")] 
+    public function get relativeparent() : String    
+    {
+            return _internal_relativeparent;
     }    
 
     /**
      * data property setters
      */      
-    public function set numberOfFiles(value:Number) : void 
+    public function set extension(value:String) : void 
     {    	
         var recalcValid:Boolean = false;
+    	if (value == null || _internal_extension == null)
+    	{
+    		recalcValid = true;
+    	}	
     	
     	
-    	var oldValue:Number = _internal_numberOfFiles;               
+    	var oldValue:String = _internal_extension;               
         if (oldValue !== value)
         {
-            _internal_numberOfFiles = value;
-        	this.dispatchEvent(mx.events.PropertyChangeEvent.createUpdateEvent(this, "numberOfFiles", oldValue, _internal_numberOfFiles));
+            _internal_extension = value;
+        	this.dispatchEvent(mx.events.PropertyChangeEvent.createUpdateEvent(this, "extension", oldValue, _internal_extension));
+        }    	     
+        
+        if (recalcValid && model_internal::_cacheInitialized_isValid)
+        {
+            model_internal::isValid_der = model_internal::calculateIsValid();
+        }  
+    }    
+    public function set file(value:String) : void 
+    {    	
+        var recalcValid:Boolean = false;
+    	if (value == null || _internal_file == null)
+    	{
+    		recalcValid = true;
+    	}	
+    	
+    	
+    	var oldValue:String = _internal_file;               
+        if (oldValue !== value)
+        {
+            _internal_file = value;
+        	this.dispatchEvent(mx.events.PropertyChangeEvent.createUpdateEvent(this, "file", oldValue, _internal_file));
         }    	     
         
         if (recalcValid && model_internal::_cacheInitialized_isValid)
@@ -112,20 +149,41 @@ public class _Super_ExtensionInfo extends flash.events.EventDispatcher implement
             model_internal::isValid_der = model_internal::calculateIsValid();
         }  
     }    
-    public function set extension(value:String) : void 
+    public function set relativefile(value:String) : void 
     {    	
         var recalcValid:Boolean = false;
-    	if (value == null || _internal_extension == null)
+    	if (value == null || _internal_relativefile == null)
     	{
     		recalcValid = true;
     	}	
     	
     	
-    	var oldValue:String = _internal_extension;               
+    	var oldValue:String = _internal_relativefile;               
         if (oldValue !== value)
         {
-            _internal_extension = value;
-        	this.dispatchEvent(mx.events.PropertyChangeEvent.createUpdateEvent(this, "extension", oldValue, _internal_extension));
+            _internal_relativefile = value;
+        	this.dispatchEvent(mx.events.PropertyChangeEvent.createUpdateEvent(this, "relativefile", oldValue, _internal_relativefile));
+        }    	     
+        
+        if (recalcValid && model_internal::_cacheInitialized_isValid)
+        {
+            model_internal::isValid_der = model_internal::calculateIsValid();
+        }  
+    }    
+    public function set relativeparent(value:String) : void 
+    {    	
+        var recalcValid:Boolean = false;
+    	if (value == null || _internal_relativeparent == null)
+    	{
+    		recalcValid = true;
+    	}	
+    	
+    	
+    	var oldValue:String = _internal_relativeparent;               
+        if (oldValue !== value)
+        {
+            _internal_relativeparent = value;
+        	this.dispatchEvent(mx.events.PropertyChangeEvent.createUpdateEvent(this, "relativeparent", oldValue, _internal_relativeparent));
         }    	     
         
         if (recalcValid && model_internal::_cacheInitialized_isValid)
@@ -170,8 +228,25 @@ public class _Super_ExtensionInfo extends flash.events.EventDispatcher implement
 			violatedConsts.push("extensionIsRequired");
 			validationFailureMessages.push("extension is required");
 		}
+		if (_model.isFileAvailable && _internal_file == null)
+		{
+			violatedConsts.push("fileIsRequired");
+			validationFailureMessages.push("file is required");
+		}
+		if (_model.isRelativefileAvailable && _internal_relativefile == null)
+		{
+			violatedConsts.push("relativefileIsRequired");
+			validationFailureMessages.push("relativefile is required");
+		}
+		if (_model.isRelativeparentAvailable && _internal_relativeparent == null)
+		{
+			violatedConsts.push("relativeparentIsRequired");
+			validationFailureMessages.push("relativeparent is required");
+		}
 
 		var styleValidity:Boolean = true;
+	
+	
 	
 	
 	
@@ -202,14 +277,14 @@ public class _Super_ExtensionInfo extends flash.events.EventDispatcher implement
 
     [Transient] 
 	[Bindable(event="propertyChange")] 
-    public function get _model() : _ExtensionInfoEntityMetadata
+    public function get _model() : _FileinfoEntityMetadata
     {
 		return model_internal::_dminternal_model;              
     }	
     
-    public function set _model(value : _ExtensionInfoEntityMetadata) : void       
+    public function set _model(value : _FileinfoEntityMetadata) : void       
     {
-    	var oldValue : _ExtensionInfoEntityMetadata = model_internal::_dminternal_model;               
+    	var oldValue : _FileinfoEntityMetadata = model_internal::_dminternal_model;               
         if (oldValue !== value)
         {
         	model_internal::_dminternal_model = value;

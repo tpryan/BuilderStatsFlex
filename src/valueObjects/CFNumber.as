@@ -1,5 +1,5 @@
 /**
- * This is a generated sub-class of _ExtensionInfo.as and is intended for behavior
+ * This is a generated sub-class of _CFNumber.as and is intended for behavior
  * customization.  This class is only generated when there is no file already present
  * at its target location.  Thus custom behavior that you add here will survive regeneration
  * of the super-class. 
@@ -15,7 +15,7 @@ package valueObjects
 
 import com.adobe.fiber.core.model_internal;
 
-public class ExtensionInfo extends _Super_ExtensionInfo
+public class CFNumber extends _Super_CFNumber
 {
     /** 
      * DO NOT MODIFY THIS STATIC INITIALIZER - IT IS NECESSARY
@@ -30,17 +30,17 @@ public class ExtensionInfo extends _Super_ExtensionInfo
      */     
     public static function _initRemoteClassAlias() : void
     {
-        _Super_ExtensionInfo.model_internal::initRemoteClassAliasSingle(valueObjects.ExtensionInfo);
-        _Super_ExtensionInfo.model_internal::initRemoteClassAliasAllRelated();
+        _Super_CFNumber.model_internal::initRemoteClassAliasSingle(valueObjects.CFNumber);
+        _Super_CFNumber.model_internal::initRemoteClassAliasAllRelated();
     }
      
     model_internal static function initRemoteClassAliasSingleChild() : void
     {
-        _Super_ExtensionInfo.model_internal::initRemoteClassAliasSingle(valueObjects.ExtensionInfo);
+        _Super_CFNumber.model_internal::initRemoteClassAliasSingle(valueObjects.CFNumber);
     }
     
     {
-        _Super_ExtensionInfo.model_internal::initRemoteClassAliasSingle(valueObjects.ExtensionInfo);
+        _Super_CFNumber.model_internal::initRemoteClassAliasSingle(valueObjects.CFNumber);
     }
     /** 
      * END OF DO NOT MODIFY SECTION

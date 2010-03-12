@@ -26,9 +26,8 @@
 				
 				rootPath = this.parameters.rootpath;
 				fileStatsService.url = this.parameters.cfc;
-				
-				
 				fileStatsService.init();
+				
 			}
 			
 			protected function fileStatsFault(event:FaultEvent):void{
@@ -38,19 +37,19 @@
 			
 			protected function exGrid_creationCompleteHandler(event:FlexEvent):void
 			{
-				getLinesByExtensionResult.token = fileStatsService.getLinesByExtension(rootPath);
+				getLinesByExtensionResult.token = fileStatsService.getLinesByExtension("getLinesByExtension", rootPath);
 			}
 			
 			
 			protected function dirGrid_creationCompleteHandler(event:FlexEvent):void
 			{
-				getLinesByDirectoryResult.token = fileStatsService.getLinesByDirectory(rootPath);
+				getLinesByDirectoryResult.token = fileStatsService.getLinesByDirectory("getLinesByDirectory", rootPath);
 			}
 			
 			
 			protected function allGrid_creationCompleteHandler(event:FlexEvent):void
 			{
-				getLineCountsAllResult.token = fileStatsService.getLineCountsAll(rootPath);
+				getLineCountsAllResult.token = fileStatsService.getLineCountsAll("getLineCountsAll", rootPath);
 			}
 			
 
@@ -73,8 +72,8 @@
 			
 			protected function header_creationCompleteHandler(event:FlexEvent):void
 			{
-				getGrandTotalResult.token = fileStatsService.getGrandTotal(rootPath);
-				getLineCountsAllResult.token = fileStatsService.getLineCountsAll(rootPath);
+				getGrandTotalResult.token = fileStatsService.getGrandTotal("getGrandTotal", rootPath);
+				getLineCountsAllResult.token = fileStatsService.getLineCountsAll("getLineCountsAll", rootPath);
 			}
 			
 
@@ -128,7 +127,7 @@
 		<mx:NumberFormatter id="numberFormatter" precision="0" useThousandsSeparator="true" useNegativeSign="true"/>
 
 		<s:CallResponder id="getLinesByExtensionResult"/>
-		<filestatsservice:FileStatsService id="fileStatsService" fault="fileStatsService_faultHandler(event)" showBusyCursor="true" />
+		<filestatsservice:FileStatsService id="fileStatsService" fault="fileStatsService_faultHandler(event)" showBusyCursor="true" url="{this.parameters.cfc}" />
 		<s:CallResponder id="getLinesByDirectoryResult"/>
 		<s:CallResponder id="getLineCountsAllResult" result="getLineCountsAllResult_resultHandler(event)"/>
 		<s:CallResponder id="getGrandTotalResult" result="getGrandTotalResult_resultHandler(event)"/>

@@ -3,6 +3,7 @@
 			   xmlns:s="library://ns.adobe.com/flex/spark" 
 			   xmlns:mx="library://ns.adobe.com/flex/mx" 
 			   xmlns:filestatsservice="services.filestatsservice.*" 
+			   height= "480"
 			   initialize="init()">
 	<fx:Script>
 		<![CDATA[
@@ -174,15 +175,17 @@
 	<mx:Legend includeIn="directory" dataProvider="{dirChart}" x="318" y="30" height="435" width="152" id="dirLegend"/>
 	
 	<!-- All Interface -->
-	<s:Label x="333" y="41" text="All" includeIn="all,default" x.all="10" id="allLabel" />
-	<mx:DataGrid x="333" y="59" height="406" width="473" id="allGrid" creationComplete="allGrid_creationCompleteHandler(event)" dataProvider="{getLineCountsAllResult.lastResult}" includeIn="all,default" width.all="796" x.all="10" >
+	<s:Label y="41" text="All" includeIn="all,default" x.all="10" id="allLabel"  left.default="333"/>
+	<mx:DataGrid id="allGrid" creationComplete="allGrid_creationCompleteHandler(event)" 
+				 dataProvider="{getLineCountsAllResult.lastResult}" includeIn="all,default" 
+				 top="59"  left="333" height="411"  left.all="10" right="10">
 		<mx:columns>
 			<mx:DataGridColumn headerText="File" dataField="relativefile" />
 			<mx:DataGridColumn headerText="Extension" width="75"  dataField="extension"/>
 			<mx:DataGridColumn headerText="Lines" dataField="lines" width="75" textAlign="right" itemRenderer="lineNumberRenderer" />
 		</mx:columns>
 	</mx:DataGrid>
-	<s:Button x="732" y="34" label="Detail" id="allButton" includeIn="all,default" label.all="Back" click="allButton_clickHandler(event)" />
+	<s:Button label="Detail" id="allButton" includeIn="all,default" label.all="Back" click="allButton_clickHandler(event)" right.default="10" top.default="30" right.all="10" top.all="30"/>
 	
 	
 
@@ -346,12 +349,12 @@
 				<s:Parallel target="{exLabel}">
 					<s:Fade duration="500" />
 				</s:Parallel>
-				<s:Parallel target="{allGrid}">
-					<s:Resize duration="500" startDelay="500" />
-					<s:Move duration="500" startDelay="500" />
-				</s:Parallel>
 				<s:Parallel target="{allLabel}">
 					<s:Move duration="500" startDelay="500" />
+				</s:Parallel>
+				<s:Parallel target="{allGrid}">
+					<s:Resize duration="500" startDelay="500" />
+					
 				</s:Parallel>
 				<s:Parallel target="{allButton}">
 					<s:Move duration="500" startDelay="500" />
